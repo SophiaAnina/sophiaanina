@@ -69,12 +69,12 @@ const translations = {
       },
       {
         title: "CPHD Website Redesign",
-        description: "During my internship at CPHD, I helped develop the redesign CPHD's own website. The website is made using the CMS platform Wordpress using the theme Divi. The redesign consisted of a new layout and a new color palette and a general structuring of the UX.",
+        description: "During my internship at CPHD, I helped develop the redesign of CPHD's own website. The website is made using the CMS platform Wordpress using the theme Divi. The redesign consisted of a new layout and a new color palette and a general structuring of the UX.  ",
         imageAlt: "CPHD Frontpage Project",
         links: [
-          { label: "Figma Prototype" },
-          { label: "Github" },
-          { label: "Moodboard" },
+          { label: "CPH digital website" },
+          { label: "Insurteg Website" },
+        
           { label: "Report" }
         ]
       }
@@ -169,9 +169,8 @@ const translations = {
         description: "Under mit praktikophold hos CPHD hjalp jeg med at udvikle redesignet af CPHD's egen hjemmeside. Hjemmesiden er lavet ved brug af CMS platformen Wordpress med temaet Divi. Redesignet bestod af et nyt layout og en ny farvepalet og en generel strukturering af UX.",
         imageAlt: "CPHD Forside Projekt",
         links: [
-          { label: "Figma Prototype" },
-          { label: "Github" },
-          { label: "Moodboard" },
+          { label: "CPH digital hjemmeside" },
+          { label: "Insurteg hjemmeside" },
           { label: "Rapport" }
         ]
       }
@@ -340,10 +339,9 @@ const getProjectsData = (language) => [
     description: translations[language].projects[2].description,
     tags: ["WordPress", "PHP", "Tailwind CSS"],
     links: [
-      { label: translations[language].projects[2].links[0].label, url: "https://www.figma.com/design/pVm2ml1O4BTL3gswSNL59W/Hovedopgave---Prototype?node-id=1-4&p=f&t=C6RqElfTsK3yFjwg-0" },
-      { label: translations[language].projects[2].links[1].label, url: "https://github.com/SophiaAnina/BOXBOXCLUB" },
-      { label: translations[language].projects[2].links[2].label, url: "https://miro.com/app/board/uXjVIGXeqPM=/" },
-      { label: translations[language].projects[2].links[3].label, url: "/Hovedopgaven-maria-mikkel-sophia-gruppe-6-jrs.pdf", download: "BOX_BOX_CLUB_Rapport.pdf" }
+      { label: translations[language].projects[2].links[0].label, url: "https://www.cphdigital.dk/" },
+      { label: translations[language].projects[2].links[1].label, url: "https://www.insurteg.com/find-et-pensionsfirma/" },
+      { label: translations[language].projects[2].links[2].label, url: "/PraktikRapport_2025-1.pdf", download: "Internship_Rapport.pdf" }
     ],
     image: "/CPHD-Frontpage.jpeg",
     imageAlt: translations[language].projects[2].imageAlt,
@@ -359,6 +357,7 @@ export default function Home() {
   const [randomizedSkills, setRandomizedSkills] = useState([]);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Contact form state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -481,14 +480,30 @@ export default function Home() {
 
   // Auto-play carousel
   useEffect(() => {
-    if (isCarouselPaused) return;
+    if (isCarouselPaused || isMobile) return;
     
     const interval = setInterval(() => {
       setCurrentProjectIndex((prev) => (prev + 1) % projects.length);
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
-  }, [isCarouselPaused]); // Remove currentProjectIndex from dependencies to prevent restart on every slide change
+  }, [isCarouselPaused, isMobile]); // Add isMobile to dependencies
+
+  // Check for mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 700);
+    };
+
+    // Check on mount
+    checkMobile();
+
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Create randomized skills array on component mount
   useEffect(() => {
@@ -621,6 +636,7 @@ export default function Home() {
               onTouchEnd={onTouchEnd}
               onMouseEnter={() => setIsCarouselPaused(true)}
               onMouseLeave={() => setIsCarouselPaused(false)}
+              style={{ touchAction: 'pan-y pinch-zoom' }}
             >
               <div className={styles.carouselTrack}>
                 {projects.map((project, index) => (
