@@ -216,8 +216,8 @@ const LottieAnimation = () => {
         loop={true}
         autoplay={true}
         style={{ 
-          width: '100%', 
-          height: '100%'
+          width: 'fit-content', 
+          height: 'fit-content',
         }}
       />
     </div>
@@ -612,7 +612,7 @@ export default function Home() {
         </div>       
           <LottieAnimation />   
        </div>
-          <h1>{t.featuredProjects}</h1>  
+          <h1 className={styles.featuredProjects}>{t.featuredProjects}</h1>  
           <div className={styles.carouselContainer}>
             <div 
               className={styles.carousel}
