@@ -904,11 +904,11 @@ a.secondary {
   }
 
   .carouselSlide.prevSlide {
-    transform: scale(0.75) translateX(250px) rotateY(-15deg);
+    transform: scale(0) translateX(0) rotateY(0);
   }
 
   .carouselSlide.nextSlide {
-    transform: scale(0.75) translateX(-250px) rotateY(15deg);
+    transform: scale(0) translateX(0) rotateY(0);
   }
 
   .project, .Computer {
@@ -926,10 +926,12 @@ a.secondary {
     min-width: auto;
   }
 
-  
 
   .projectLinks a:hover {
     background-color: var(--gray-alpha-100);
+  }
+  .carouselNav{
+    display: none;
   }
 }
 
