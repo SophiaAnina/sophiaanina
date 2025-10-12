@@ -9,6 +9,7 @@ import React from 'react';
 import Lottie from 'lottie-react';
 import animationData from '../assets/Mobile.json';
 import emailjs from '@emailjs/browser';
+import Link from 'next/link';
 
 // Translation object
 const translations = {
@@ -31,6 +32,21 @@ const translations = {
     uxui: "UX/UI",
     contentCreation: "content creation",
     featuredProjects: "Featured Projects",
+    services: {
+      title: "Services",
+      webDev: "Web Development",
+      webDevDesc: "Modern, responsive websites built with React, Next.js, and cutting-edge technologies.",
+      appDev: "App Development", 
+      appDevDesc: "Cross-platform mobile applications using React Native for iOS and Android.",
+      uiux: "UI/UX Design",
+      uiuxDesc: "User-centered design solutions that prioritize usability and accessibility.",
+      seo: "SEO Optimization",
+      seoDesc: "Search engine optimization to improve your website's visibility and ranking.",
+      graphicdesign: "Graphic Design",
+      graphicdesignDesc: "Creating visually compelling graphics and branding materials using Adobe Creative Suite.",
+      bookNow: "Book a Service",
+      bookDescription: "Ready to start your project? Let's discuss your needs and create something amazing together."
+    },
     skills: {
       categories: {
         frontendDevelopment: "Frontend Development",
@@ -77,6 +93,15 @@ const translations = {
         
           { label: "Report" }
         ]
+      },
+      {
+        title: "Pokedex",
+        description: " I developed A simple Pokedex app built with React Native. Features include browsing Pokémon, viewing details, and searching by name or type. Currently I am working on adding lazy loading and pagination to improve performance as well as adding a favorites feature so users can save their favorite Pokémon for quick access. I've build it as a APK build with expo and am looking into publishing it on the Google Play Store.",
+        imageAlt: "Pokedex Project",
+        links: [
+          { label: "Github" },
+          { label: "Demo" }
+        ]
       }
     ],
     contact: {
@@ -107,10 +132,15 @@ const translations = {
       previousProject: "Previous project",
       nextProject: "Next project",
       goToProject: "Go to project {number}"
+    },
+    nav: {
+      services: "Services", 
+      booking: "Book Service",
+      contact: "Contact"
     }
   },
   da: {
-    title: "Sophia Anina Kingston",
+    title: "Sophia Anina Kingston", 
     description: "Sophia Anina Kingstons Portfolio",
     multimediaDesigner: "Multimediedesigner",
     frontendDeveloper: "Frontend Udvikler",
@@ -128,6 +158,21 @@ const translations = {
     uxui: "UX/UI",
     contentCreation: "indholdsproduktion",
     featuredProjects: "Fremhævede Projekter",
+    services: {
+      title: "Services",
+      webDev: "Webudvikling",
+      webDevDesc: "Moderne, responsive hjemmesider bygget med React, Next.js og banebrydende teknologier.",
+      appDev: "App Udvikling",
+      appDevDesc: "Platformuafhængige mobilapplikationer ved brug af React Native til iOS og Android.",
+      uiux: "UI/UX Design", 
+      uiuxDesc: "Brugercentrerede designløsninger der prioriterer brugervenlighed og tilgængelighed.",
+      seo: "SEO Optimering",
+      seoDesc: "Søgemaskineoptimering for at forbedre din hjemmesides synlighed og rangering.",
+      graphicdesign: "Grafisk Design",
+      graphicdesignDesc: "Skabelse af visuelt overbevisende grafik og brandingmaterialer ved brug af Adobe Creative Suite.",
+      bookNow: "Book en Service",
+      bookDescription: "Klar til at starte dit projekt? Lad os diskutere dine behov og skabe noget fantastisk sammen."
+    },
     skills: {
       categories: {
         frontendDevelopment: "Frontend Udvikling",
@@ -173,6 +218,14 @@ const translations = {
           { label: "Insurteg hjemmeside" },
           { label: "Rapport" }
         ]
+      },
+      {
+        title: "Pokedex",
+        description: "En simpel Pokedex app bygget med React Native. Funktioner inkluderer at browse Pokémon, se detaljer og søge efter navn eller type. Jeg arbejder i øjeblikket på at tilføje lazy loading og pagination for at forbedre ydeevnen samt tilføje en favoritfunktion, så brugere kan gemme deres yndlings-Pokémon for hurtig adgang. Jeg har bygget den som en APK-build med Expo og undersøger muligheden for at udgive den på Google Play Butik.",
+        links: [
+          { label: "Github" },
+          { label: "Demo" }
+        ]
       }
     ],
     contact: {
@@ -203,6 +256,11 @@ const translations = {
       previousProject: "Forrige projekt",
       nextProject: "Næste projekt",
       goToProject: "Gå til projekt {number}"
+    },
+    nav: {
+      services: "Services",
+      booking: "Book Service",
+      contact: "Kontakt"
     }
   }
 };
@@ -346,6 +404,19 @@ const getProjectsData = (language) => [
     image: "/CPHD-Frontpage.jpeg",
     imageAlt: translations[language].projects[2].imageAlt,
     layout: "desktop"
+  },
+  {
+    id: 4,
+    title: translations[language].projects[3].title,
+    description: translations[language].projects[3].description,
+    tags: ["React Native", "JavaScript", "Gaming"],
+    links: [
+      { label: translations[language].projects[3].links[0].label, url: "https://github.com/SophiaAnina/pokedex.git" },
+      { label: translations[language].projects[3].links[1].label, url: "https://expo.dev/accounts/sophiaanina/projects/pokedex/builds/1bf8917c-4212-4f37-91f3-1e43a913d60d" }
+    ],
+    image: "/pokedex.jpg",
+    imageAlt: translations[language].projects[3].imageAlt,
+    layout: "mobile"
   }
 ];
 
@@ -566,6 +637,32 @@ export default function Home() {
           </button>
         </div>
 
+        {/* Navigation Bar */}
+        <nav className={styles.navbar}>
+          <div className={styles.navContent}>
+            <div className={styles.logo}>
+              <span>Sophia Anina</span>
+            </div>
+            <ul className={styles.navLinks}>
+              <li>
+                <a href="#services" className={styles.navLink}>
+                  {t.nav.services}
+                </a>
+              </li>
+              <li>
+                <Link href="/booking" className={styles.navLink}>
+                  {t.nav.booking}
+                </Link>
+              </li>
+              <li>
+                <a href="#contact" className={styles.navLink}>
+                  {t.nav.contact}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
         <div className={styles.Header}>
       <div className={styles.headerContent}>
         <h3>{t.title}</h3>
@@ -627,6 +724,44 @@ export default function Home() {
         </div>       
           <LottieAnimation />   
        </div>
+
+          {/* Services Section */}
+          <div id="services" className={styles.servicesSection}>
+            <h1 className={styles.servicesTitle}>{t.services.title}</h1>
+            <div className={styles.servicesGrid}>
+              <div className={styles.serviceCard}>
+                <h3>{t.services.webDev}</h3>
+                <p>{t.services.webDevDesc}</p>
+              </div>
+              <div className={styles.serviceCard}>
+                <h3>{t.services.appDev}</h3>
+                <p>{t.services.appDevDesc}</p>
+              </div>
+              <div className={styles.serviceCard}>
+                <h3>{t.services.uiux}</h3>
+                <p>{t.services.uiuxDesc}</p>
+              </div>
+              <div style={{flexDirection: 'row',display:'flex', gap: '1rem', gridColumn:'1/4'}}>
+              <div className={styles.serviceCard}>
+                <h3>{t.services.seo}</h3>
+                <p>{t.services.seoDesc}</p>
+              </div>
+              <div className={styles.serviceCard}>
+                <h3>{t.services.graphicdesign}</h3>
+                <p>{t.services.graphicdesignDesc}</p>
+              </div>
+              </div>
+            </div>
+            
+            {/* Book Service Call-to-Action */}
+            <div className={styles.bookingCta}>
+              <h2>{t.services.bookDescription}</h2>
+              <Link href="/booking" className={styles.bookingButton}>
+                {t.services.bookNow}
+              </Link>
+            </div>
+          </div>
+
           <h1 className={styles.featuredProjects}>{t.featuredProjects}</h1>  
           <div className={styles.carouselContainer}>
             <div 
@@ -711,7 +846,7 @@ export default function Home() {
           </div>
           
           {/* Contact Form Section */}
-          <div className={styles.contactSection}>
+          <div id="contact" className={styles.contactSection}>
             <h2>{t.contact.title}</h2>
             <p className={styles.contactDescription}>
               {t.contact.description}
