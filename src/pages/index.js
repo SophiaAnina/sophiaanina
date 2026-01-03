@@ -18,7 +18,7 @@ const translations = {
     description: "Sophia Anina Kingston's Portfolio",
     multimediaDesigner: "Multimedia Designer",
     frontendDeveloper: "Frontend Developer",
-    mainTitle: "Hyperfocused Frontend Developer",
+    mainTitle: "Freelance Frontend Developer",
     focusedOn: "Focused on",
     focusWords: [
       "Application Development",
@@ -158,21 +158,23 @@ const translations = {
     uxui: "UX/UI",
     contentCreation: "indholdsproduktion",
     featuredProjects: "Fremhævede Projekter",
-    services: {
-      title: "Services",
-      webDev: "Webudvikling",
-      webDevDesc: "Moderne, responsive hjemmesider bygget med React, Next.js og banebrydende teknologier.",
-      appDev: "App Udvikling",
-      appDevDesc: "Platformuafhængige mobilapplikationer ved brug af React Native til iOS og Android.",
-      uiux: "UI/UX Design", 
-      uiuxDesc: "Brugercentrerede designløsninger der prioriterer brugervenlighed og tilgængelighed.",
-      seo: "SEO Optimering",
-      seoDesc: "Søgemaskineoptimering for at forbedre din hjemmesides synlighed og rangering.",
-      graphicdesign: "Grafisk Design",
-      graphicdesignDesc: "Skabelse af visuelt overbevisende grafik og brandingmaterialer ved brug af Adobe Creative Suite.",
-      bookNow: "Book en Service",
-      bookDescription: "Klar til at starte dit projekt? Lad os diskutere dine behov og skabe noget fantastisk sammen."
-    },
+    
+    // services: {
+    //   title: "Services",
+    //   webDev: "Webudvikling",
+    //   webDevDesc: "Moderne, responsive hjemmesider bygget med React, Next.js og banebrydende teknologier.",
+    //   appDev: "App Udvikling",
+    //   appDevDesc: "Platformuafhængige mobilapplikationer ved brug af React Native til iOS og Android.",
+    //   uiux: "UI/UX Design", 
+    //   uiuxDesc: "Brugercentrerede designløsninger der prioriterer brugervenlighed og tilgængelighed.",
+    //   seo: "SEO Optimering",
+    //   seoDesc: "Søgemaskineoptimering for at forbedre din hjemmesides synlighed og rangering.",
+    //   graphicdesign: "Grafisk Design",
+    //   graphicdesignDesc: "Skabelse af visuelt overbevisende grafik og brandingmaterialer ved brug af Adobe Creative Suite.",
+    //   bookNow: "Book en Service",
+    //   bookDescription: "Klar til at starte dit projekt? Lad os diskutere dine behov og skabe noget fantastisk sammen."
+    // },
+
     skills: {
       categories: {
         frontendDevelopment: "Frontend Udvikling",
@@ -725,8 +727,8 @@ export default function Home() {
           <LottieAnimation />   
        </div>
 
-          {/* Services Section */}
-          <div id="services" className={styles.servicesSection}>
+         
+          {/* <div id="services" className={styles.servicesSection}>
             <h1 className={styles.servicesTitle}>{t.services.title}</h1>
             <div className={styles.servicesGrid}>
               <div className={styles.serviceCard}>
@@ -751,16 +753,16 @@ export default function Home() {
                 <p>{t.services.graphicdesignDesc}</p>
               </div>
               </div>
-            </div>
+            </div> */}
             
-            {/* Book Service Call-to-Action */}
+            {/* Book Service Call-to-Action
             <div className={styles.bookingCta}>
               <h2>{t.services.bookDescription}</h2>
               <Link href="/booking" className={styles.bookingButton}>
                 {t.services.bookNow}
               </Link>
             </div>
-          </div>
+          </div> */}
 
           <h1 className={styles.featuredProjects}>{t.featuredProjects}</h1>  
           <div className={styles.carouselContainer}>
