@@ -1,15 +1,16 @@
 import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
-import { League_Gothic } from "next/font/google";
 import { Geist, Geist_Mono } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { FaCode } from "react-icons/fa6";
-import { LuImagePlay } from "react-icons/lu";
-import React from 'react';
 import Lottie from 'lottie-react';
 import animationData from '../assets/Mobile.json';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
+import Header from "@/components/Header";
+import About from "@/components/About";
+import ProjectsCarousel from "@/components/ProjectsCarousel";
+import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 
 // Translation object
 const translations = {
@@ -65,7 +66,7 @@ const translations = {
     projects: [
       {
         title: "BOX BOX CLUB",
-        description: "A platform for fans of Formula 1 to connect and share their passion. Including a forum with a community board for friendly discussion restricting words of discrimination. Including a learning platform with quizzes to test their knowledge and a article board for news and updates to expand it.",
+        description: "For my final project at CPH-Business I developed a platform for fans of Formula 1 to connect and share their passion. Including a forum with a community board for friendly discussion restricting words of discrimination. Including a learning platform with quizzes to test their knowledge and a article board for news and updates to expand it.",
         imageAlt: "Box Box Club Project",
         links: [
           { label: "Figma Prototype" },
@@ -624,108 +625,48 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div
-        className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
-      >
+      <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
         <main className={styles.main}>
-        {/* Language Toggle Button */}
-        <div className={styles.languageToggle}>
-          <button 
-            onClick={toggleLanguage}
-            className={styles.languageButton}
-            aria-label={`Switch to ${language === 'en' ? 'Danish' : 'English'}`}
-          >
-            {language === 'en' ? '🇩🇰 DA' : '🇬🇧 EN'}
-          </button>
-        </div>
-
-        {/* Navigation Bar */}
-        <nav className={styles.navbar}>
-          <div className={styles.navContent}>
-            <div className={styles.logo}>
-              <span>Sophia Anina</span>
+          {/* Language Toggle Button */}
+          <div className={styles.languageToggle}>
+            <button 
+              onClick={toggleLanguage}
+              className={styles.languageButton}
+              aria-label={`Switch to ${language === 'en' ? 'Danish' : 'English'}`}
+            >
+              {language === 'en' ? '🇩🇰 DA' : '🇬🇧 EN'}
+            </button>
+          </div>
+          {/* Navigation Bar */}
+          <nav className={styles.navbar}>
+            <div className={styles.navContent}>
+              <div className={styles.logo}>
+                <span>Sophia Anina</span>
+              </div>
+              <ul className={styles.navLinks}>
+                <li>
+                  <a href="#services" className={styles.navLink}>
+                    {t.nav.services}
+                  </a>
+                </li>
+                {/* <li>
+                  <Link href="/booking" className={styles.navLink}>
+                    {t.nav.booking}
+                  </Link>
+                </li> */}
+                <li>
+                  <a href="#contact" className={styles.navLink}>
+                    {t.nav.contact}
+                  </a>
+                </li>
+              </ul>
             </div>
-            <ul className={styles.navLinks}>
-              <li>
-                <a href="#services" className={styles.navLink}>
-                  {t.nav.services}
-                </a>
-              </li>
-              <li>
-                <Link href="/booking" className={styles.navLink}>
-                  {t.nav.booking}
-                </Link>
-              </li>
-              <li>
-                <a href="#contact" className={styles.navLink}>
-                  {t.nav.contact}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <div className={styles.Header}>
-      <div className={styles.headerContent}>
-        <h3>{t.title}</h3>
-
-        <div className={styles.tabs}>
-          <div className={styles.tab}><LuImagePlay /><p>{t.multimediaDesigner}</p></div>
-          <div className={styles.tab}><FaCode style={{color:'aquamarine'}}/><p>{t.frontendDeveloper}</p></div>
-        </div>
-        
-        <div>
-          <h1 className={styles.title}>{t.mainTitle}</h1>
-          <h1>
-            {t.focusedOn}{" "}
-            <span className={styles.focusWordContainer}>
-              <span 
-                className={`${styles.focusWord} ${isAnimating ? styles.focusWordExit : ''}`}
-                style={{ color: specializationColors[currentWordIndex]?.color }}
-              >
-                {t.focusWords[currentWordIndex]}
-              </span>
-            </span>
-          </h1>
-          
-          {/* Skills Display - All Skills Mixed and Randomized */}
-          
-          <div style={{ marginTop: '3rem' }}>
-          <p className={styles.description}>
-            {t.aboutDescription
-              .split(t.frontendDevelopment)
-              .map((part, index, array) => {
-                // Process each part for UX/UI and content creation highlighting
-                const processedPart = part
-                  .split(new RegExp(`(\\b${t.uxui}\\b)`, 'g'))
-                  .map((segment, i) => 
-                    segment === t.uxui ? 
-                      <span key={`uxui-${index}-${i}`} style={{color: '#675ABF'}}>{segment}</span> : 
-                      segment.split(new RegExp(`(\\b${t.contentCreation}\\b)`, 'g'))
-                        .map((subSegment, j) => 
-                          subSegment === t.contentCreation ? 
-                            <span key={`content-${index}-${i}-${j}`} style={{color: '#4682B4'}}>{subSegment}</span> : 
-                            subSegment
-                        )
-                  )
-                  .flat();
-
-                return (
-                  <React.Fragment key={index}>
-                    {processedPart}
-                    {index < array.length - 1 && (
-                      <span style={{color:'aquamarine'}}>{t.frontendDevelopment}</span>
-                    )}
-                  </React.Fragment>
-                );
-              })}
-          </p>
-           
-          </div>
-        </div>
-        </div>       
-          <LottieAnimation />   
-       </div>
+          </nav>
+          {/* Header Section */}
+          <Header t={t} currentWordIndex={currentWordIndex} isAnimating={isAnimating} />
+          <LottieAnimation />
+          {/* About Section */}
+          <About t={t} />
 
          
           {/* <div id="services" className={styles.servicesSection}>
@@ -764,177 +705,33 @@ export default function Home() {
             </div>
           </div> */}
 
-          <h1 className={styles.featuredProjects}>{t.featuredProjects}</h1>  
-          <div className={styles.carouselContainer}>
-            <div 
-              className={styles.carousel}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-              onMouseEnter={() => setIsCarouselPaused(true)}
-              onMouseLeave={() => setIsCarouselPaused(false)}
-              style={{ touchAction: 'pan-y pinch-zoom' }}
-            >
-              <div className={styles.carouselTrack}>
-                {projects.map((project, index) => (
-                  <div 
-                    key={project.id}
-                    className={getSlideClass(index, currentProjectIndex, projects.length)}
-                  >
-                    <div className={project.layout === 'mobile' ? styles.project : styles.Computer}>
-                      <img src={project.image} alt={project.imageAlt} className={styles.projectImage} />
-                      <div className={styles.projectContent}>
-                        <h3>{project.title}</h3>
-                        <p className={styles.projectDescription}>{project.description}</p>
-                        <div className={styles.projectTags}>
-                          {project.tags.map((tag, tagIndex) => (
-                            <div key={tagIndex} style={{backgroundColor: getSkillColor(tag, language)}}>
-                              <p>{tag}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <div className={styles.projectLinks}>
-                          {project.links.map((link, linkIndex) => (
-                            <a 
-                              key={linkIndex}
-                              href={link.url} 
-                              className={styles.projectLink}
-                              {...(link.download && { download: link.download })}
-                            >
-                              {link.label}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Navigation Buttons */}
-            <div className={styles.carouselNav}>
-              <button 
-                onClick={prevProject} 
-                className={styles.navButton}
-                aria-label={t.navigation.previousProject}
-                style={{marginRight: 'auto'}}
-              >
-                ←
-              </button>
-              
-              {/* Dots indicator */}
-            
-              
-              <button 
-                onClick={nextProject} 
-                className={styles.navButton}
-                aria-label={t.navigation.nextProject}
-                style={{marginLeft: 'auto'}}
-              >
-                →
-              </button>
-            </div>
-              <div className={styles.carouselDots}>
-                {projects.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToProject(index)}
-                    className={`${styles.dot} ${index === currentProjectIndex ? styles.activeDot : ''}`}
-                    aria-label={t.navigation.goToProject.replace('{number}', index + 1)}
-                  />
-                ))}
-              </div>
-          </div>
-          
+          <h1 className={styles.featuredProjects}>{t.featuredProjects}</h1>
+          <ProjectsCarousel
+            projects={projects}
+            currentProjectIndex={currentProjectIndex}
+            getSlideClass={getSlideClass}
+            getSkillColor={getSkillColor}
+            language={language}
+            prevProject={prevProject}
+            nextProject={nextProject}
+            goToProject={goToProject}
+            isCarouselPaused={isCarouselPaused}
+            setIsCarouselPaused={setIsCarouselPaused}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+            t={t}
+          />
           {/* Contact Form Section */}
-          <div id="contact" className={styles.contactSection}>
-            <h2>{t.contact.title}</h2>
-            <p className={styles.contactDescription}>
-              {t.contact.description}
-            </p>
-            
-            <form ref={formRef} onSubmit={sendEmail} className={styles.contactForm}>
-              <div className={styles.formGroup}>
-                <label htmlFor="user_name">{t.contact.form.name}</label>
-                <input 
-                  type="text" 
-                  id="user_name"
-                  name="user_name" 
-                  required 
-                  className={styles.formInput}
-                  placeholder={t.contact.form.namePlaceholder}
-                />
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label htmlFor="user_email">{t.contact.form.email}</label>
-                <input 
-                  type="email" 
-                  id="user_email"
-                  name="user_email" 
-                  required 
-                  className={styles.formInput}
-                  placeholder={t.contact.form.emailPlaceholder}
-                />
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label htmlFor="subject">{t.contact.form.subject}</label>
-                <input 
-                  type="text" 
-                  id="subject"
-                  name="subject" 
-                  required 
-                  className={styles.formInput}
-                  placeholder={t.contact.form.subjectPlaceholder}
-                />
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label htmlFor="message">{t.contact.form.message}</label>
-                <textarea 
-                  id="message"
-                  name="message" 
-                  required 
-                  rows="6"
-                  className={styles.formTextarea}
-                  placeholder={t.contact.form.messagePlaceholder}
-                />
-              </div>
-              
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className={styles.submitButton}
-              >
-                {isSubmitting ? t.contact.form.sending : t.contact.form.sendButton}
-              </button>
-              
-              {submitStatus === 'success' && (
-                <div className={styles.successMessage}>
-                  {t.contact.form.successMessage}
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div className={styles.errorMessage}>
-                  {t.contact.form.errorMessage}
-                </div>
-              )}
-            </form>
-          </div>
-           <footer className={styles.footer}>
-         
-            <p>{t.footer.copyright.replace('{year}', new Date().getFullYear())}</p>
-            <a href="https://github.com/SophiaAnina" target="_blank" rel="noopener noreferrer">{t.footer.github}</a>
-            <a href="https://www.linkedin.com/in/sophia-anina-kingston/" target="_blank" rel="noopener noreferrer">{t.footer.linkedin}</a>
-            <a href="https://www.instagram.com/sophiaanina/" target="_blank" rel="noopener noreferrer">{t.footer.instagram}</a>
-           
-         
-        </footer>
+          <ContactForm
+            t={t}
+            formRef={formRef}
+            sendEmail={sendEmail}
+            isSubmitting={isSubmitting}
+            submitStatus={submitStatus}
+          />
+          <Footer t={t} />
         </main>
-       
       </div>
     </>
   );

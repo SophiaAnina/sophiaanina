@@ -34,10 +34,6 @@
   padding-top: 80px; /* Add space for fixed navbar */
 }
 
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
 .main code {
   font-family: inherit;
   background: var(--gray-alpha-100);
@@ -524,6 +520,10 @@ a.secondary {
 .projects .projectDescription {
   min-width: 300px;
 }
+.projectDescription {
+ margin: 10px 0;
+ line-height: 1.8;
+}
 
 .project p {
   line-height: 1.8;
@@ -784,7 +784,7 @@ a.secondary {
 
 .formGroup label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
   color: var(--foreground);
   font-size: 0.9rem;
